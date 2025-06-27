@@ -1,3 +1,4 @@
+from datetime import timedelta
 from typing import Any, Literal
 
 from mcp import StdioServerParameters
@@ -31,8 +32,8 @@ class StreamableHttpServerParams(BaseModel):
 
     url: str  # The endpoint URL.
     headers: dict[str, Any] | None = None  # Optional headers to include in requests.
-    timeout: float = 30.0  # HTTP timeout for regular operations in seconds.
-    sse_read_timeout: float = 300.0  # Timeout for SSE read operations in seconds.
+    timeout: timedelta = timedelta(seconds=30)  # HTTP timeout for regular operations.
+    sse_read_timeout: timedelta = timedelta(seconds=60 * 5)  # Timeout for SSE read operations.
     terminate_on_close: bool = True
 
 
